@@ -7,8 +7,9 @@ from keep_alive import keep_alive
 from discord.ext import commands
 #Import libares
 
-bot = commands.Bot(command_prefix="-",case_insensitive=True)
-#prefix and case senstive commands off
+bot = commands.Bot(command_prefix="-",case_insensitive=True, help_command=None)
+bot.remove_command('help')
+#Setup
 
 bot.author_id = 487258918465306634
 #Set bot owner
@@ -19,6 +20,23 @@ async def on_ready():
     print(bot.user)
 #bot is ready if this happens
 
+@bot.command(name ='help', description="Help command", pass_content=True)
+async def help(ctx):
+	author = ctx.message.author
+
+	embed = discord.Embed(
+		color = discord.Color.orange()
+	)
+
+	embed.set_author(name="Help")
+	embed.add_field(name= '-code', value='Returns the link to the github used for this bot', inline=False)
+	embed.add_field(name= '-invite', value='Returns the value of the link to invite the bot', inline=False)
+	embed.add_field(name= '-credits', value='Returns the bot credits', inline=False)
+	embed.add_field(name= '-hello', value='Greets the user', inline=False)
+
+	await ctx.send(author, embed=embed)
+#help command (with embed)
+
 @bot.command(name='hello', description="Greet the user!")
 async def hello(ctx):
     await ctx.send(f"Hello {ctx.author.name}!")
@@ -26,7 +44,16 @@ async def hello(ctx):
 
 @bot.command(name='invite', description="Get the invite link for user")
 async def invite(ctx):
-    await ctx.send(f"```Invite link is https://bit.ly/1negative11! Just too tell you the bot may change its link if 1rom11 change the name```")
+    	author = ctx.message.author
+
+		embed = discord.Embed(
+			color = discord.Color.orange()
+		)
+
+	embed.set_author(name="Invite link")
+	embed.add_field(name= 'Invite Link', value='```Invite link is https://bit.ly/1negative11! Just too tell you the bot may change its link if 1rom11 change the name```')
+
+	await ctx.send(author, embed=embed)
 #invite command
 
 @bot.command(name='credits', description="Bot's credits")
