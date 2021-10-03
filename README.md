@@ -1,7 +1,5 @@
 # Negative
 
-Invite link = ![click me](https://github.com/1rom11/discordbit)
-
 
 ## Get started
 Clone git
