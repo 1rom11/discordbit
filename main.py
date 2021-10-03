@@ -1,6 +1,5 @@
 #Made using relp.it and discord.py
 #-1rom11
-#This is based of a template on relp.it the cogs and keep_alive.py are not made by me.
 
 import discord
 import time
@@ -43,28 +42,40 @@ async def help(ctx):
 
 @bot.command(name='hello', description="Greet the user!")
 async def hello(ctx):
-	author = ctx.message.author
+	user = ctx.message.author
 	embed = discord.Embed(
 		title="Hello", description="",color= discord.Color.orange()
 		)
 
 	embed.add_field(name="Hello", value=f"Hello {ctx.author.name}!", inline=True)
 
-	await ctx.send(author, embed=embed)
+	await ctx.send(user, embed=embed)
 #hello commands
 
 @bot.command(name='invite', description="Get the invite link for user")
 async def invite(ctx):
-	await ctx.send(f"```Invite link is https://bit.ly/1negative11! Just too tell you the bot may change its link if 1rom11 change the name```")
+	user = ctx.message.author
+	embed = discord.Embed(
+		title="Invte Link", description="Invite link for bot", color=discord.Color.orange()
+	)
+
+	embed.add_field(name="Invite", value=f"Invite link is https://bit.ly/1negative11! Just too tell you the bot may change its link if 1rom11 change the name")
+
+	await ctx.send(user, embed=embed)
 #invite command
 
 @bot.command(name='credits', description="Bot's credits")
 async def credit(ctx):
-    await ctx.send(f"""```Bot creator: 1rom11
-	Created for School Discord
-	Coded in relp.it vist https://discord.1rom11yt.repl.co
-	```
-	**Thank you for using this bot**""")
+    user = ctx.message.author
+	embed = discord.Embed(
+		title="Credits", description=f"Credit of 	negative", color = discord.Color.orange()
+	)
+
+	embed.add_field(name="Credits for Negative", value="""Creator = 1rom11
+	Creation started on 2021-10-1
+	**Thank you for using the bot**""")
+
+	await ctx.send(user, embed=embed)
 #credit command
 
 @bot.command(name='code', description="Bot code")
@@ -85,7 +96,7 @@ if __name__ == '__main__':
 keep_alive()
 token = os.environ['token']
 os.environ.get("TOKEN")
-#Change token to your bot token
+#Change token to your bot token (Token must be in a secret (I used relp.it))
 bot.run(token)
 #Flask ping bot to stay awake
 
