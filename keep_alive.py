@@ -7,7 +7,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
-	return 'Bot has posted. BOT IS ONLINE RIGHT NOW (Check discord server)'
+	return 'Online'
 
 def run():
   app.run(

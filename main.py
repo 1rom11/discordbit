@@ -1,3 +1,7 @@
+#Made using relp.it and discord.py
+#-1rom11
+#This is based of a template on relp.it the cogs and keep_alive.py are not made by me.
+
 import discord
 import time
 import os
@@ -39,21 +43,19 @@ async def help(ctx):
 
 @bot.command(name='hello', description="Greet the user!")
 async def hello(ctx):
-    await ctx.send(f"Hello {ctx.author.name}!")
+	author = ctx.message.author
+	embed = discord.Embed(
+		title="Hello", description="",color= discord.Color.orange()
+		)
+
+	embed.add_field(name="Hello", value=f"Hello {ctx.author.name}!", inline=True)
+
+	await ctx.send(author, embed=embed)
 #hello commands
 
 @bot.command(name='invite', description="Get the invite link for user")
 async def invite(ctx):
-    	author = ctx.message.author
-
-		embed = discord.Embed(
-			color = discord.Color.orange()
-		)
-
-	embed.set_author(name="Invite link")
-	embed.add_field(name= 'Invite Link', value='```Invite link is https://bit.ly/1negative11! Just too tell you the bot may change its link if 1rom11 change the name```')
-
-	await ctx.send(author, embed=embed)
+	await ctx.send(f"```Invite link is https://bit.ly/1negative11! Just too tell you the bot may change its link if 1rom11 change the name```")
 #invite command
 
 @bot.command(name='credits', description="Bot's credits")
@@ -82,7 +84,8 @@ if __name__ == '__main__':
 
 keep_alive()
 token = os.environ['token']
-os.environ.get("TOKEN") 
+os.environ.get("TOKEN")
+#Change token to your bot token
 bot.run(token)
 #Flask ping bot to stay awake
 
@@ -93,4 +96,4 @@ else:
 
 #owner ship boolen
 
-# Orignal bot autor = 1rom11
+# Orignal bot author = 1rom11
