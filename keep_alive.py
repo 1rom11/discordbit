@@ -7,7 +7,7 @@ app = Flask('')
 
 @app.route('/')
 def home():
-	return 'Online'
+	return 'Online (Loged in)'
 
 def run():
   app.run(

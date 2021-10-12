@@ -19,9 +19,15 @@ bot.author_id = 487258918465306634
 
 @bot.event 
 async def on_ready():
-    print("Bot has posted. Link to invite = https://bit.ly/1negative11")
-    print(bot.user)
-#bot is ready if this happens
+    print('Logged on as', bot.user)
+
+    async def on_message(self, message):
+        # Don't refspond to ourselves
+        if message.author == self.user:
+            return
+# Bot is ready if this happens
+
+
 
 @bot.command(name ='help', description="Help command", pass_content=True)
 async def help(ctx):
@@ -36,6 +42,7 @@ async def help(ctx):
 	embed.add_field(name= '-invite', value='Returns the value of the link to invite the bot', inline=False)
 	embed.add_field(name= '-credits', value='Returns the bot credits', inline=False)
 	embed.add_field(name= '-hello', value='Greets the user', inline=False)
+	embed.add_field(name='-kick @user', value='Kick mentioned user (ex. -kick @1rom11)', inline=False)
 
 	await ctx.send(author, embed=embed)
 #help command (with embed)
@@ -66,22 +73,34 @@ async def invite(ctx):
 
 @bot.command(name='credits', description="Bot's credits")
 async def credit(ctx):
-    user = ctx.message.author
-	embed = discord.Embed(
-		title="Credits", description=f"Credit of 	negative", color = discord.Color.orange()
-	)
 
-	embed.add_field(name="Credits for Negative", value="""Creator = 1rom11
-	Creation started on 2021-10-1
-	**Thank you for using the bot**""")
-
-	await ctx.send(user, embed=embed)
+	await ctx.send(f"```Creator: 1rom11```")
 #credit command
 
 @bot.command(name='code', description="Bot code")
 async def code(ctx):
     await ctx.send(f"Code for bot is in https://bit.ly/code-negative")
 #code command
+
+@bot.command(name="Kick", description="Kick member")
+async def kick(ctx, member : discord.Member):
+
+    try:
+        await member.kick(reason=None)
+        await ctx.send("Kicked "+member.mention) #simple kick command to demonstrate how to get and use member mentions
+
+    except:
+        await ctx.send(f"Bot cannot kick this person. Ether the person has higher rank or{ bot.username} don't have kick perms")
+
+@bot.command(name="Ban", description="Ban member")
+async def ban(ctx, member : discord.Member):
+
+    try:
+        await member.ban(reason=None)
+        await ctx.send("Baned "+member.mention) #simple ban command to demonstrate how to get and use member mentions
+
+    except:
+        await ctx.send(f"Bot cannot ban this person. Ether the person has higher rank or {bot.username} don't have ban perms")
 
 extensions = [
 	'cogs.cog_example'
